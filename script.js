@@ -3,6 +3,18 @@ const metaCharset = document.createElement("meta");
 metaCharset.setAttribute("charset", "UTF-8");
 document.head.appendChild(metaCharset);
 
+/* Prism CSS */
+const link = document.createElement("link");
+link.rel = "stylesheet";
+link.href =
+  "https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism.min.css";
+document.head.appendChild(link);
+const script = document.createElement("script");
+script.src = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js";
+script.onload = () => {
+  Prism.highlightAll();
+};
+
 const metaViewPort = document.createElement("meta");
 metaViewPort.setAttribute("name", "viewport");
 metaViewPort.setAttribute("content", "width=device-width, initial-scale=1.0");
@@ -215,10 +227,19 @@ jsCodeShow.style.border = "2px solid #000000";
 jsCodeShow.style.width = "500px";
 jsCodeShow.style.height = "300px";
 jsCodeShow.style.transform = "translateX(600px)";
-jsCodeShow.style.transition = "transform 0.4s ease";
+jsCodeShow.style.transition = "transform 1s ease";
 window.onload = () => {
   jsCodeShow.style.transform = "translateX(0px)";
 };
+function copyJsCode(element, code) {
+  navigator.clipboard.writeText(code);
+  element.textContent = "Copied!";
+  element.style.color = "green";
+  setTimeout(() => {
+    element.textContent = "Copy";
+    element.style.color = "black";
+  }, 1500);
+}
 welcomeSection.appendChild(jsCodeShow);
 const jsCodeShowTopHeader = document.createElement("div");
 jsCodeShowTopHeader.className = "js-code-show-top-header";
@@ -243,7 +264,7 @@ jsCodeShowCopyButton.style.height = "25px";
 jsCodeShowCopyButton.style.border = "none";
 jsCodeShowCopyButton.style.backgroundColor = "transparent";
 jsCodeShowCopyButton.style.cursor = "pointer";
-jsCodeShowCopyButton.onclick = copyJsCode;
+jsCodeShowCopyButton.onclick = () => copyJsCode(jsCodeShowCopyButton, jsCode);
 jsCodeShowTopHeader.appendChild(jsCodeShowCopyButton);
 const jsCodeShowPre = document.createElement("pre");
 jsCodeShowPre.style.padding = "0px 15px 0px 15px";
@@ -258,8 +279,9 @@ let jsCode = `console.log("This is my first JS-Made website!");
 const text = document.createElement("p");
 text.textContent = "Hello, World!";
 text.style.color = "blue";
+document.body.appendChild(text);
 
-const button = document.createElement("button")";
+const button = document.createElement("button");
 button.textContent = "Click Me";
 
 function click() {
@@ -268,62 +290,200 @@ function click() {
 }
   
 button.onclick = click;
-45555555555555555555555555555555
-55555555555555555555555555555555
-5555555555555555555555555555555`;
+document.body.appendChild(button);
+
+for(let i = 0; i < 6; i++) {
+  console.log("This is line " + i);
+  const text = document.createElement("p");
+  text.textContent = "This is line " + i;
+  document.body.appendChild(text);
+}
+`;
 let jsVisibleCode = "";
 let index = 0;
-
-function copyJsCode() {
-  navigator.clipboard.writeText(jsCode);
-  jsCodeShowCopyButton.textContent = "Copied!";
-  jsCodeShowCopyButton.style.color = "green";
-  setTimeout(() => {
-    jsCodeShowCopyButton.textContent = "Copy";
-    jsCodeShowCopyButton.style.color = "black";
-  }, 1500);
-}
 
 function typeCode() {
   if (index < jsCode.length) {
     jsVisibleCode += jsCode[index];
-    jsCodeShowPre.textContent = jsVisibleCode + "█";
+    jsCodeShowPre.innerHTML = jsVisibleCode + `&#9608;`;
     index++;
     setTimeout(typeCode, 30);
   }
 }
-setTimeout(typeCode, 500);
+setTimeout(typeCode, 900);
 
 main.appendChild(welcomeSection);
 
 const websiteCreator = document.createElement("div");
 websiteCreator.className = "website-creator";
-websiteCreator.style.display = "flex";
-websiteCreator.style.alignItems = "center";
-websiteCreator.style.justifyContent = "space-between";
 websiteCreator.style.padding = "20px";
-main.appendChild(websiteCreator);
 const websiteCreatorText = document.createElement("div");
 websiteCreatorText.className = "website-creator-text";
+websiteCreatorText.style.display = "flex";
+websiteCreatorText.style.alignItems = "center";
+websiteCreatorText.style.gap = "20px";
+websiteCreatorText.style.marginBottom = "25px";
 websiteCreator.appendChild(websiteCreatorText);
-const websiteCreatorName = document.createElement("h2");
-websiteCreatorName.textContent = "Jabir Ibne Habib";
-websiteCreatorName.style.fontSize = "28px";
-websiteCreatorName.style.margin = "0";
-websiteCreatorText.appendChild(websiteCreatorName);
-const websiteCreatorTitle = document.createElement("h3");
-websiteCreatorTitle.textContent = "Website Creator";
-websiteCreatorTitle.style.margin = "0";
-websiteCreatorTitle.style.marginTop = "5px";
-websiteCreatorText.appendChild(websiteCreatorTitle);
-const websiteCreatorPosition = document.createElement("h3");
-websiteCreatorPosition.textContent = "Junior Coder, Full Stack Web Developer";
-websiteCreatorPosition.style.margin = "0";
-websiteCreatorPosition.style.marginTop = "5px";
-websiteCreatorText.appendChild(websiteCreatorPosition);
 const websiteCreatorImage = document.createElement("img");
 websiteCreatorImage.src =
   "https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg";
 websiteCreatorImage.alt = "Website Creator";
 websiteCreatorImage.className = "website-creator-image";
-websiteCreator.appendChild(websiteCreatorImage);
+websiteCreatorText.appendChild(websiteCreatorImage);
+const websiteCreatorIntroducerText = document.createElement("p");
+websiteCreatorText.appendChild(websiteCreatorIntroducerText);
+const websiteCreatorName = document.createElement("h2");
+websiteCreatorName.textContent = "Jabir Ibne Habib";
+websiteCreatorName.style.fontSize = "28px";
+websiteCreatorName.style.margin = "0";
+websiteCreatorIntroducerText.appendChild(websiteCreatorName);
+const websiteCreatorTitle = document.createElement("h3");
+websiteCreatorTitle.textContent = "Website Creator";
+websiteCreatorTitle.style.margin = "0";
+websiteCreatorTitle.style.marginTop = "1px";
+websiteCreatorIntroducerText.appendChild(websiteCreatorTitle);
+const websiteCreatorPosition = document.createElement("h4");
+websiteCreatorPosition.textContent = "Junior Coder, Full Stack Web Developer";
+websiteCreatorPosition.style.margin = "0";
+websiteCreatorPosition.style.marginTop = "3px";
+websiteCreatorIntroducerText.appendChild(websiteCreatorPosition);
+const websiteCreatorBio = document.createElement("p");
+websiteCreatorBio.innerHTML =
+  'Welcome to my website! This is a website that is made by only <b><span class="speech-element">JavaScript</span></b>. I rendered all the contents by <b>JavaScript</b>. I didn\'t used <b><span class="speech-element">HTML</span></b> or <b><span class="speech-element">CSS</span></b> externally. For HTML content, I created them by JS methods like <code><b>document.createElement()</b></code>, <code><b>element.appendChild()</b></code>, <code><b>element.innerHTML</b></code> etc. more and for CSS styles, I applied them using JS <code><b>style</b></code> object as well. To say shortly, my website\'s structure is implemented by JS. I showcased the codes at below. You can see the codes and will be able to know how I designed the website.<br><br>This is not a website for my work or any other purposes. The main reason for creating this website is to showcase <b>my skills</b> in JavaScript programming and to show how basically a JS based website looks like. You can see the differences between my website and the tradional websites, you can <b>compare</b> them. You will also be able to note that how JS works. How the DOM manipulation is working here. Why it might be slow for a JS based website that manipulates the DOM directly. It is a website for showcase.' +
+  '<br><br>Last few days, I was thinking of making a website that is completely based on JavaScript. I work in <b><span class="speech-element">Python</span></b> with the library <b><span class="speech-element">Tkinter</span></b>. I created some small GUI app. That is not like HTML (Markup Language). The components like Button, Text, Checkbox, Input, Image etc. are made by methods. Some of the methods are: <code><b>tkinter.Button()</b></code>, <code><b>tkinter.Label()</b></code>, <code><b>tkinter.Entry()</b></code>, <code><b>tkinter.Text()</b></code> etc. So, I thought that I will create a website for demo that is fully based on JS. And this website\'s JS codes are really looks like Python\'s code with Tkinter. I included the codes at below. You can see that.<br><br>Actually, I did many projects for practise. I want to be a Full Stack Web Developer. But besides the projects, I want to do some funs with coding. It is also a fun project. If a project gives you fun, if it is a weird project and also you can practise while making it, then why not to make it? What\'s the loss? Then it is a good project and you, of course, can do it besides your work!<br><br>So, explore the website, see the techniques, and enjoy it! Good Luck :)';
+websiteCreatorBio.style.fontSize = "17.5px";
+websiteCreatorBio.style.lineHeight = "1.5";
+websiteCreatorBio.style.marginTop = "10px";
+websiteCreatorBio.style.textAlign = "justify";
+websiteCreator.appendChild(websiteCreatorBio);
+const speechElements = document.querySelectorAll(".speech-element");
+speechElements.forEach((element) => {
+  element.parentElement.style.textDecoration = "underline";
+  element.parentElement.style.cursor = "pointer";
+  element.parentElement.style.textUnderlineOffset = "4.5px";
+  element.parentElement.style.color = "blue";
+  element.parentElement.insertAdjacentHTML("afterbegin", "&#128266;");
+});
+function speechText(text) {
+  const speech = new SpeechSynthesisUtterance(text);
+  window.speechSynthesis.speak(speech);
+}
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("speech-element")) {
+    const text = e.target.textContent;
+    speechText(text);
+  }
+});
+main.appendChild(websiteCreator);
+
+const fileShowcase = document.createElement("div");
+fileShowcase.classList.add("file-showcase");
+fileShowcase.style.padding = "10px";
+const fileShowcaseTitle = document.createElement("h2");
+fileShowcaseTitle.textContent = "File Showcase";
+fileShowcaseTitle.style.textAlign = "center";
+fileShowcase.appendChild(fileShowcaseTitle);
+const fileShowcasePlace = document.createElement("div");
+fileShowcasePlace.classList.add("file-showcase-place");
+fileShowcasePlace.style.display = "flex";
+fileShowcasePlace.style.flexDirection = "row";
+fileShowcasePlace.style.flexWrap = "wrap";
+fileShowcasePlace.style.justifyContent = "center";
+fileShowcasePlace.style.gap = "20px";
+fileShowcase.appendChild(fileShowcasePlace);
+const HTMLFileShowPlace = document.createElement("div");
+HTMLFileShowPlace.classList.add("file-showcase-item");
+const HTMLFileShowPlacePre = document.createElement("pre");
+HTMLFileShowPlace.appendChild(HTMLFileShowPlacePre);
+const HTMLFileShowPlaceCode = document.createElement("code");
+HTMLFileShowPlaceCode.classList.add("language-js");
+HTMLFileShowPlacePre.appendChild(HTMLFileShowPlaceCode);
+const CSSFileShowPlace = document.createElement("div");
+CSSFileShowPlace.classList.add("file-showcase-item");
+const CSSFileShowPlacePre = document.createElement("pre");
+CSSFileShowPlace.appendChild(CSSFileShowPlacePre);
+const CSSFileShowPlaceCode = document.createElement("code");
+CSSFileShowPlaceCode.classList.add("language-js");
+CSSFileShowPlacePre.appendChild(CSSFileShowPlaceCode);
+const JSFileShowPlace = document.createElement("div");
+JSFileShowPlace.classList.add("file-showcase-item");
+const JSFileShowPlacePre = document.createElement("pre");
+JSFileShowPlace.appendChild(JSFileShowPlacePre);
+const JSFileShowPlaceCode = document.createElement("code");
+JSFileShowPlaceCode.classList.add("language-js");
+JSFileShowPlacePre.appendChild(JSFileShowPlaceCode);
+[HTMLFileShowPlace, CSSFileShowPlace, JSFileShowPlace].forEach(
+  (fileShowPlace, index) => {
+    // Container styles
+    fileShowPlace.style.border = "2px solid #000000ff";
+
+    fileShowPlace.style.borderRadius = "5px";
+    fileShowPlace.style.overflowX = "hidden";
+    fileShowPlace.style.width = "410px";
+    fileShowPlace.style.height = "300px";
+    fileShowPlace.style.backgroundColor = "#f9f9f9";
+    fileShowPlace.children[0].style.height = "79%";
+    // fileShowPlace.children[0].style.backgroundColor = "#cc0e0eff";
+    fileShowPlace.children[0].style.width = "100%";
+    fileShowPlace.children[0].style.overflowY = "auto";
+    fileShowPlace.children[0].style.padding = "10px";
+    fileShowPlace.children[0].style.boxSizing = "border-box";
+    fileShowPlace.children[0].style.whiteSpace = "pre-wrap";
+    fileShowPlace.children[0].children[0].style.whiteSpace = "pre-wrap";
+    fileShowPlace.children[0].children[0].style.display = "block";
+    fileShowPlace.children[0].children[0].style.wordBreak = "break-word";
+
+    const topHeader = document.createElement("div");
+    topHeader.className = "file-show-top-header";
+    topHeader.style.display = "flex";
+    topHeader.style.justifyContent = "space-between";
+    topHeader.style.alignItems = "center";
+    topHeader.style.padding = "5px 10px 5px 10px";
+    topHeader.style.borderBottom = "2px solid #000000ff";
+    fileShowPlace.appendChild(topHeader);
+    const title = document.createElement("p");
+    title.textContent = ["HTML", "CSS", "JavaScript"][index];
+    title.style.margin = "0";
+    title.style.fontSize = "15px";
+    topHeader.appendChild(title);
+    const copyButton = document.createElement("button");
+    copyButton.textContent = "Copy";
+    copyButton.style.padding = "0";
+    copyButton.style.width = "50px";
+    copyButton.style.height = "25px";
+    copyButton.style.fontSize = "14px";
+    copyButton.style.fontWeight = "bold";
+    copyButton.style.border = "none";
+    copyButton.style.backgroundColor = "transparent";
+    copyButton.style.cursor = "pointer";
+    copyButton.onclick = () =>
+      copyJsCode(copyButton, fileShowPlace.children[1].children[0].textContent);
+    topHeader.appendChild(copyButton);
+    fileShowPlace.prepend(topHeader);
+  }
+);
+
+function loadFile(filePath, insertCodePlace) {
+  fetch(filePath)
+    .then((res) => res.text())
+    .then((text) => {
+      insertCodePlace.textContent = text;
+    })
+    .catch((err) => console.error("Error loading file:", err));
+}
+loadFile(
+  "https://raw.githubusercontent.com/WebDeveloperJabir/purejs-wonder-web/refs/heads/main/index.html",
+  HTMLFileShowPlaceCode
+);
+loadFile(
+  "https://raw.githubusercontent.com/WebDeveloperJabir/purejs-wonder-web/refs/heads/main/style.css",
+  CSSFileShowPlaceCode
+);
+loadFile(
+  "https://raw.githubusercontent.com/WebDeveloperJabir/purejs-wonder-web/refs/heads/main/script.js",
+  JSFileShowPlaceCode
+);
+fileShowcasePlace.appendChild(HTMLFileShowPlace);
+fileShowcasePlace.appendChild(CSSFileShowPlace);
+fileShowcasePlace.appendChild(JSFileShowPlace);
+main.appendChild(fileShowcase);
