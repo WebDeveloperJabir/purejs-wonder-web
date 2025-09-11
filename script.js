@@ -4,16 +4,18 @@ metaCharset.setAttribute("charset", "UTF-8");
 document.head.appendChild(metaCharset);
 
 /* Prism CSS */
-const link = document.createElement("link");
-link.rel = "stylesheet";
-link.href =
-  "https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism.min.css";
-document.head.appendChild(link);
-const script = document.createElement("script");
-script.src = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js";
-script.onload = () => {
-  Prism.highlightAll();
+const prismCss = document.createElement("link");
+prismCss.rel = "stylesheet";
+prismCss.href = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/themes/prism.min.css";
+document.head.appendChild(prismCss);
+const prismScript = document.createElement("script");
+prismScript.src = "https://cdnjs.cloudflare.com/ajax/libs/prism/1.30.0/prism.min.js";
+prismScript.onload = () => {
+  loadFile("https://raw.githubusercontent.com/WebDeveloperJabir/purejs-wonder-web/refs/heads/main/index.html", HTMLFileShowPlaceCode);
+  loadFile("https://raw.githubusercontent.com/WebDeveloperJabir/purejs-wonder-web/refs/heads/main/style.css", CSSFileShowPlaceCode);
+  loadFile("https://raw.githubusercontent.com/WebDeveloperJabir/purejs-wonder-web/refs/heads/main/script.js", JSFileShowPlaceCode);
 };
+document.head.appendChild(prismScript);
 
 const metaViewPort = document.createElement("meta");
 metaViewPort.setAttribute("name", "viewport");
@@ -325,8 +327,7 @@ websiteCreatorText.style.gap = "20px";
 websiteCreatorText.style.marginBottom = "25px";
 websiteCreator.appendChild(websiteCreatorText);
 const websiteCreatorImage = document.createElement("img");
-websiteCreatorImage.src =
-  "https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg";
+websiteCreatorImage.src = "https://static.vecteezy.com/system/resources/thumbnails/000/439/863/small/Basic_Ui__28186_29.jpg";
 websiteCreatorImage.alt = "Website Creator";
 websiteCreatorImage.className = "website-creator-image";
 websiteCreatorText.appendChild(websiteCreatorImage);
@@ -412,78 +413,74 @@ JSFileShowPlace.appendChild(JSFileShowPlacePre);
 const JSFileShowPlaceCode = document.createElement("code");
 JSFileShowPlaceCode.classList.add("language-js");
 JSFileShowPlacePre.appendChild(JSFileShowPlaceCode);
-[HTMLFileShowPlace, CSSFileShowPlace, JSFileShowPlace].forEach(
-  (fileShowPlace, index) => {
-    // Container styles
-    fileShowPlace.style.border = "2px solid #000000ff";
+[HTMLFileShowPlace, CSSFileShowPlace, JSFileShowPlace].forEach((fileShowPlace, index) => {
+  // Container styles
+  fileShowPlace.style.border = "2px solid #000000ff";
 
-    fileShowPlace.style.borderRadius = "5px";
-    fileShowPlace.style.overflowX = "hidden";
-    fileShowPlace.style.width = "410px";
-    fileShowPlace.style.height = "300px";
-    fileShowPlace.style.backgroundColor = "#f9f9f9";
-    fileShowPlace.children[0].style.height = "79%";
-    // fileShowPlace.children[0].style.backgroundColor = "#cc0e0eff";
-    fileShowPlace.children[0].style.width = "100%";
-    fileShowPlace.children[0].style.overflowY = "auto";
-    fileShowPlace.children[0].style.padding = "10px";
-    fileShowPlace.children[0].style.boxSizing = "border-box";
-    fileShowPlace.children[0].style.whiteSpace = "pre-wrap";
-    fileShowPlace.children[0].children[0].style.whiteSpace = "pre-wrap";
-    fileShowPlace.children[0].children[0].style.display = "block";
-    fileShowPlace.children[0].children[0].style.wordBreak = "break-word";
+  fileShowPlace.style.borderRadius = "5px";
+  fileShowPlace.style.overflowX = "hidden";
+  fileShowPlace.style.width = "410px";
+  fileShowPlace.style.height = "300px";
+  fileShowPlace.style.backgroundColor = "#f9f9f9";
+  fileShowPlace.children[0].style.height = "79%";
+  // fileShowPlace.children[0].style.backgroundColor = "#cc0e0eff";
+  fileShowPlace.children[0].style.width = "100%";
+  fileShowPlace.children[0].style.overflowY = "auto";
+  fileShowPlace.children[0].style.padding = "10px";
+  fileShowPlace.children[0].style.boxSizing = "border-box";
+  fileShowPlace.children[0].style.whiteSpace = "pre-wrap";
+  fileShowPlace.children[0].children[0].style.whiteSpace = "pre-wrap";
+  fileShowPlace.children[0].children[0].style.display = "block";
+  fileShowPlace.children[0].children[0].style.wordBreak = "break-word";
 
-    const topHeader = document.createElement("div");
-    topHeader.className = "file-show-top-header";
-    topHeader.style.display = "flex";
-    topHeader.style.justifyContent = "space-between";
-    topHeader.style.alignItems = "center";
-    topHeader.style.padding = "5px 10px 5px 10px";
-    topHeader.style.borderBottom = "2px solid #000000ff";
-    fileShowPlace.appendChild(topHeader);
-    const title = document.createElement("p");
-    title.textContent = ["HTML", "CSS", "JavaScript"][index];
-    title.style.margin = "0";
-    title.style.fontSize = "15px";
-    topHeader.appendChild(title);
-    const copyButton = document.createElement("button");
-    copyButton.textContent = "Copy";
-    copyButton.style.padding = "0";
-    copyButton.style.width = "50px";
-    copyButton.style.height = "25px";
-    copyButton.style.fontSize = "14px";
-    copyButton.style.fontWeight = "bold";
-    copyButton.style.border = "none";
-    copyButton.style.backgroundColor = "transparent";
-    copyButton.style.cursor = "pointer";
-    copyButton.onclick = () =>
-      copyJsCode(copyButton, fileShowPlace.children[1].children[0].textContent);
-    topHeader.appendChild(copyButton);
-    fileShowPlace.prepend(topHeader);
-  }
-);
+  const topHeader = document.createElement("div");
+  topHeader.className = "file-show-top-header";
+  topHeader.style.display = "flex";
+  topHeader.style.justifyContent = "space-between";
+  topHeader.style.alignItems = "center";
+  topHeader.style.padding = "5px 10px 5px 10px";
+  topHeader.style.borderBottom = "2px solid #000000ff";
+  fileShowPlace.appendChild(topHeader);
+  const title = document.createElement("p");
+  title.textContent = ["HTML", "CSS", "JavaScript"][index];
+  title.style.margin = "0";
+  title.style.fontSize = "15px";
+  topHeader.appendChild(title);
+  const copyButton = document.createElement("button");
+  copyButton.textContent = "Copy";
+  copyButton.style.padding = "0";
+  copyButton.style.width = "50px";
+  copyButton.style.height = "25px";
+  copyButton.style.fontSize = "14px";
+  copyButton.style.fontWeight = "bold";
+  copyButton.style.border = "none";
+  copyButton.style.backgroundColor = "transparent";
+  copyButton.style.cursor = "pointer";
+  copyButton.onclick = () => copyJsCode(copyButton, fileShowPlace.children[1].children[0].textContent);
+  topHeader.appendChild(copyButton);
+  fileShowPlace.prepend(topHeader);
+});
 
 function loadFile(filePath, insertCodePlace) {
   fetch(filePath)
     .then((res) => res.text())
     .then((text) => {
       insertCodePlace.textContent = text;
+      Prism.highlightElement(insertCodePlace);
     })
     .catch((err) => console.error("Error loading file:", err));
 }
-loadFile(
-  "https://raw.githubusercontent.com/WebDeveloperJabir/purejs-wonder-web/refs/heads/main/index.html",
-  HTMLFileShowPlaceCode
-);
-loadFile(
-  "https://raw.githubusercontent.com/WebDeveloperJabir/purejs-wonder-web/refs/heads/main/style.css",
-  CSSFileShowPlaceCode
-);
-loadFile(
-  "https://raw.githubusercontent.com/WebDeveloperJabir/purejs-wonder-web/refs/heads/main/script.js",
-  JSFileShowPlaceCode
-);
 fileShowcasePlace.appendChild(HTMLFileShowPlace);
 fileShowcasePlace.appendChild(CSSFileShowPlace);
 fileShowcasePlace.appendChild(JSFileShowPlace);
+HTMLFileShowPlaceCode.classList.add("language-html");
+CSSFileShowPlaceCode.classList.add("language-css");
+JSFileShowPlaceCode.classList.add("language-js");
+HTMLFileShowPlaceCode.style.backgroundColor = "#F9F9F9";
+CSSFileShowPlaceCode.style.backgroundColor = "#F9F9F9";
+JSFileShowPlaceCode.style.backgroundColor = "#F9F9F9";
+HTMLFileShowPlacePre.style.backgroundColor = "#F9F9F9";
+CSSFileShowPlacePre.style.backgroundColor = "#F9F9F9";
+JSFileShowPlacePre.style.backgroundColor = "#F9F9F9";
+
 main.appendChild(fileShowcase);
